@@ -26,7 +26,7 @@ TAD ColecaoInt
 
 Colecao *colCriar( int max_itens );
 
-int colInserir( Colecao *c, char nome, int idade, float media);
+int colInserir( Colecao *c, int *item);
 
 void *colRemover( Colecao *c, void *item );
 
@@ -37,5 +37,7 @@ int colDestruir( Colecao *c );
 void *colpegarPrimeiro(Colecao *c);
 
 void *colpegarProximo(Colecao *c);
+
+Aluno *criarAluno(char[], int idade, float media);
 
 #endif

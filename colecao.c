@@ -12,11 +12,12 @@ typedef struct colecao{
 }Colecao;
 
 // Estrutura do Aluno 
-typedef struct Aluno{
-	char nome[30];
-	int idade;
-	float media; 
-}aluno; 
+typedef struct aluno{
+	char nome[30]; 
+  int idade;
+  float media;
+	
+}Aluno; 
 
 Colecao *colCriar(int maxItens){
   Colecao *c;
@@ -35,17 +36,17 @@ Colecao *colCriar(int maxItens){
 return NULL;
 }
 
-int colInserir(Colecao *c, char nome, int idade, float media){
+int colInserir(Colecao *c, int *item ){
   if ( c != NULL ) {
     if ( c->numItens < c->maxItens) {
     c->item[c->numItens] = item;
     c->numItens++;
-    c->nome = nome;
     return 1;
     }
   }
 }
 /* fim de colInserir */
+
 
 
 void *colRemover(Colecao *c, void *item){
@@ -122,4 +123,17 @@ void *colpegarProximo(Colecao *c)
         }
     }
     return NULL;
+}
+
+Aluno *criarAluno(char nome[], int idade, float media){
+  Aluno *aluno = (Aluno *)malloc(sizeof(Aluno));
+  if(aluno != NULL){
+    strcpy(aluno->nome, nome);
+    aluno->idade = idade;
+    aluno->media = media;
+    return aluno;
+  }
+  else{
+    return NULL;
+  }
 }

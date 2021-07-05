@@ -30,12 +30,12 @@ int main(){
           printf("Digite o tamanho desejado para sua colecao: \n");
           scanf("%d", &tamColecao);
           if (tamColecao>0){
-            turma = colCriar(tamColecao);
+            aluno = colCriar(tamColecao);
             printf("colecao criada com sucesso! \n");
 
             for(int i=0; i<tamColecao; i++){
               printf("Digite o nome do %d aluno: \n", i+1);
-              scanf("%s", &nome);
+              scanf("%s", nome);
 
               printf("Digite a idade do %d aluno: \n", i+1);
               scanf("%d", &idade);
@@ -48,9 +48,10 @@ int main(){
             printf("Nao foi possivel criar uma colecao com esse tamanho, tente novamente com um valor maior! \n");
           }
         if (tamColecao >= qtdAlunos){
-          colInserir(aluno, nome, idade, media);
-          qtdAlunos++;
+          aluno = criarAluno(nome,idade,media);
+          colInserir(Aluno, aluno);
           printf("Aluno cadastrado com sucesso! \n");
+          qtdAlunos++;
         }
         else{
           printf("Você ainda não tem uma colecao criada, tente escolher a opção 1! \n");
@@ -60,9 +61,19 @@ int main(){
       case 2:
         //colConsultar();
         break; 
+      case 3:
+        turma = colpegarPrimeiro(aluno);
+        for(int i=0; i<qtdAlunos*3;i++){
+          printf("%s, %d , %f\n",aluno);
+          turma = colpegarProximo(aluno);
+        }
+        //aluno = colpegarProximo(Aluno);
+        //printf("%s, %d , %f\n",aluno );
+        break;
 
       default: 
         printf("opção invalida, tente novamente!");
+        break;
     }
 
       
