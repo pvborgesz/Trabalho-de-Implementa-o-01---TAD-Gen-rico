@@ -11,13 +11,12 @@ typedef struct colecao{
   void **item;
 }Colecao;
 
-// Estrutura do Aluno 
+// Estrutura do Aluno
 typedef struct aluno{
-	char nome[30]; 
+	char nome[30];
   int idade;
   float media;
-	
-}Aluno; 
+}Aluno;
 
 Colecao *colCriar(int maxItens){
   Colecao *c;
@@ -47,34 +46,39 @@ int colInserir(Colecao *c, int *item ){
 }
 /* fim de colInserir */
 
-
-
-void *colRemover(Colecao *c, void *item){
-  int i,j;
-  int data;
-
-  if (c!=NULL){
-    if(c -> numItens > 0){
-      i=0;
-      while(i < c-> numItens && c -> item[i] != item){
-        i++;
-      }
-      if( c-> item[i] == item ){
-        data = c-> item[i];
-        for (j=i; j<c->numItens; j++){
-          c-> item[j] = c-> item[j+1];
+void *colRemover(Colecao *c, void *key, int (*cmp)(void*, void*))
+{
+  int i, j;
+  void *del;
+  if(c != NULL)
+  {
+    if(c->numItens > 0)
+    {
+      for(i=0; i < c->numItens; i++)
+      {
+        if(cmp(key, c->item[i]) == 1)
+        {
+          del = c->item[i];
+          for(j=i; j < c->numItens-1; j++)
+          {
+            c->item[j] = c->item[j+1];
+          }
+          c->numItens--;
+          return del;
         }
-        return data; 
-      } 
+      }
     }
   }
-  return -32767;
+  return NULL;
 }
+
+
+
 //fim  de colRemover
 
 void *colConsultar(Colecao *c, int item){
-  int i; 
-  int data; 
+  int i;
+  int data;
 
   if(c != NULL){
     if(c-> numItens >0){
@@ -83,7 +87,7 @@ void *colConsultar(Colecao *c, int item){
         i++;
       }
       if( c->item[i] == item){
-        return c->item; 
+        return c->item;
       }
     }
   }
@@ -112,7 +116,7 @@ void *colpegarPrimeiro(Colecao *c){
     return NULL;
 }
 
-void *colpegarProximo(Colecao *c) 
+void *colpegarProximo(Colecao *c)
 {
     if(c!=NULL){
         if(c->item != NULL){
@@ -137,3 +141,55 @@ Aluno *criarAluno(char nome[], int idade, float media){
     return NULL;
   }
 }
+
+char *pegarNome(Aluno *aluno) // Retorna o nome do Aluno
+{
+  if(aluno != NULL){
+    return aluno->nome;
+  }
+  return NULL;
+}
+
+int pegarIdade(Aluno *aluno) // Retorna a idade do Aluno
+{
+  if(aluno != NULL){
+    return aluno->idade;
+  }
+  return -1;
+}
+
+float pegarMedia(Aluno *aluno) // Retorna a media do Aluno
+{
+  if(aluno != NULL){
+    return aluno->media;
+  }
+  return 0;
+}
+
+
+/*int colRemoverAluno(Colecao *c, void *item){
+  void *data;
+  int i;
+  int *stat;
+  if(c != NULL){
+    if(c -> numItens>0){
+      i= 0;
+do
+            {
+                stat = strcmp(item, c->item[i]);
+                if(stat != 0)
+                {
+                    data = c->item[i];
+                    i++;
+                    c->item[i] = NULL;
+                }
+                else
+                {
+                    break;
+                }
+            }while(i < c->numItens);
+    }
+  }
+}*/
+
+
